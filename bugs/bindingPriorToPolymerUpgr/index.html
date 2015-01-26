@@ -5,22 +5,46 @@
     <!-- Import Polymer platform -->
     <script src="../../../webcomponentsjs/webcomponents.js"></script>
     <link rel="import" href="../../../polymer/polymer.html">
-
-    <link rel="import" href="../../imported-template.html">
 </head>
 
 <body>
-  <template id="root" bind>
-    <imported-template content="./templates/start.html"></imported-template>
-  </template>
+  <div id="stampHere"></div>
+</body>
 
-  <script type="text/javascript">
-    document.getElementById("root").model = {
-      "namespace": {
+<script>
+  (function () {
+
+    /**
+     * Insert template into DOM.
+     * @public only for debugging.
+     * @param  {String} href partial URL
+     * @return {imported-template}      self
+     */
+    function processImportedDocument(htmlImport, element){
+
+      var template = htmlImport.import.querySelector("template");
+      element.subTemplate = document.importNode(template, true);
+      if(window.PolymerExpressions) {
+        element.subTemplate.bindingDelegate = new PolymerExpressions(); //use PolymerExpressions if available. This allows <template if="{{val == 1}}">, etc
+      }
+      element.parentNode.insertBefore(element.subTemplate, element.nextSibling);
+      // debugger
+      element.subTemplate.model = {
         "list": [{
           "key": "Works"
-          }]
-      }
-    };
-  </script>
-</body>
+        }]
+      };
+    }
+
+    var element = document.getElementById("stampHere");
+    var link = document.createElement('link');
+    link.rel = "import";
+    link.href = "./templates/start.html";
+    link.onload =  function(){ processImportedDocument(this, element) };
+    // guessed workaround for Polyjuice/Launcher#82, Polymer/polymer#554, http://crbug.com/389566
+    setTimeout( function appendAsync(){
+        document.head.appendChild(link);
+    });
+   
+  })();
+</script>
