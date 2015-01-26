@@ -1,11 +1,12 @@
-<link rel="import" href="../../../../polymer/polymer.html"/>
+<link rel="import" href="../../../polymer/polymer.html"/>
 
 <polymer-element
         name="my-element"
         attributes="header data">
     <template>
+        <!-- Remove this styleshhet to make it work -->
         <link rel="stylesheet" href="my-element.css"/>
-        <h1>{{header}} / {{data}} / {{data[0].key}}</h1>
+        <h1>{{header}} / {{data}} / {{data.key}}</h1>
     </template>
     <script>
         Polymer('my-element', {

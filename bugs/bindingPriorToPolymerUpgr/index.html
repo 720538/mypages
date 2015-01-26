@@ -1,8 +1,4 @@
-<!doctype html>
 <head>
-    <title>Polymer binding issue</title>
-    <meta charset="utf-8">
-    <!-- Import Polymer platform -->
     <script src="../../../webcomponentsjs/webcomponents.js"></script>
     <link rel="import" href="../../../polymer/polymer.html">
 </head>
@@ -14,34 +10,28 @@
 <script>
   (function () {
 
-    /**
-     * Insert template into DOM.
-     * @public only for debugging.
-     * @param  {String} href partial URL
-     * @return {imported-template}      self
-     */
-    function processImportedDocument(htmlImport, element){
-
-      var template = htmlImport.import.querySelector("template");
-      element.subTemplate = document.importNode(template, true);
-      if(window.PolymerExpressions) {
-        element.subTemplate.bindingDelegate = new PolymerExpressions(); //use PolymerExpressions if available. This allows <template if="{{val == 1}}">, etc
-      }
-      element.parentNode.insertBefore(element.subTemplate, element.nextSibling);
-      // debugger
-      element.subTemplate.model = {
-        "list": [{
-          "key": "Works"
-        }]
-      };
-    }
-
     var element = document.getElementById("stampHere");
+    // create new HTML Import
     var link = document.createElement('link');
     link.rel = "import";
-    link.href = "./templates/start.html";
-    link.onload =  function(){ processImportedDocument(this, element) };
-    // guessed workaround for Polyjuice/Launcher#82, Polymer/polymer#554, http://crbug.com/389566
+    link.href = "./template.html";
+    link.onload =  function(){
+
+      // Insert template into DOM.
+      var template = this.import.querySelector("template");
+      var importedTemplate = document.importNode(template, true);
+      if(window.PolymerExpressions) {
+        importedTemplate.bindingDelegate = new PolymerExpressions(); //use PolymerExpressions if available. This allows <template if="{{val == 1}}">, etc
+      }
+      element.appendChild(importedTemplate);
+      // attach model
+      importedTemplate.model = {
+        "list": {
+          "key": "Works"
+        }
+      };
+    };
+    // guessed workaround for Polymer/polymer#554, http://crbug.com/389566
     setTimeout( function appendAsync(){
         document.head.appendChild(link);
     });
