@@ -13,11 +13,11 @@
       }
     </style>
     <template bind="{{ viewmodel }}">
-      <template is="imported-template" content="{{ subpage.html }}"></template>
+      <imported-template content="{{ subpage.html }}"></imported-template>
     </template>
-    <!-- This should work, as well:
-    <template bind="{{ viewmodel }}" is="imported-template" content="{{ viewmodel.subpage.html }}"></template> 
-    but it don't. Let's leave it fo further investigation. (tomalec)
+    <!-- This could work, as well:
+    <imported-template bind="{{ viewmodel }}" content="{{ viewmodel.subpage.html }}"></imported-template> 
+    but it don't. Let's leave it for further investigation. (tomalec)
     -->
 
   </template>

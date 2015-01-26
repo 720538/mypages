@@ -23,7 +23,7 @@ var model = {
 You can put it on screen with this:
 
 ```html
-<template is="imported-template" content="{{ html }}"></template>
+<imported-template content="{{ html }}"></imported-template>
 ```
 
 To produce that:
@@ -77,7 +77,7 @@ Or [download as ZIP](https://github.com/Juicy/imported-template/archive/gh-pages
 3. Start using it!
 
     ```html
-    <template is="imported-template" content="./your/partial.html"></template>
+    <imported-template content="./your/partial.html"></imported-template>
     ```
 
 ## Options/Attributes

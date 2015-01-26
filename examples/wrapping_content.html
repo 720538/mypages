@@ -19,7 +19,7 @@ Let's greet
 <template id="test" bind>
   <ul>
   <template repeat="{{ users }}">
-      <template is="imported-template" content="{{ html }}"><li><content></content></li></template>
+      <imported-template content="{{ html }}"><li><content></content></li></imported-template>
   </template>
   </ul>
 </template>

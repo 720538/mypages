@@ -16,10 +16,10 @@
 <body>
 
 <template id="test" bind>
-  <template bind="{{ subpage }}" is="imported-template" content="{{ subpage.html }}"></template>
+  <imported-template bind="{{ subpage }}" content="{{ subpage.html }}"></imported-template>
   <!-- You can do it a bit longer if you need:
   <template bind="{{ subpage }}">
-    <template is="imported-template" content="{{ html }}"></template>
+    <imported-template content="{{ html }}"></imported-template>
   </template>
   -->
 </template>
